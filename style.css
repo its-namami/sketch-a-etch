@@ -1,6 +1,7 @@
 #board {
   display: flex;
   flex-flow: column nowrap;
+  touch-action: none;
 }
 
 .row {
@@ -14,4 +15,8 @@
 .outline {
   outline: 1px solid red;
   outline-offset: -1px;
+}
+
+.cell.active {
+  background: blue;
 }

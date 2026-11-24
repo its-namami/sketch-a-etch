@@ -1,0 +1,17 @@
+#board {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  padding: 10px;
+}
+
+.outline {
+  outline: 1px solid red;
+  outline-offset: -1px;
+}

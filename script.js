@@ -3,6 +3,7 @@ const board = document.querySelector('#board');
 const buildCell = () => {
   const cell = document.createElement('div');
   cell.classList.add('cell');
+  cell.classList.add('outline'); // for debugging
   return cell;
 }
 

@@ -10,13 +10,23 @@
 
 .cell {
   padding: 10px;
+
+  &.active {
+    background: red;
+  }
 }
 
 .outline {
-  outline: 1px solid red;
+  outline: 1px solid yellow;
   outline-offset: -1px;
 }
 
-.cell.active {
-  background: blue;
+.hide {
+  display: none;
+}
+
+form#help,
+form#dimensions,
+.controls {
+  margin-bottom: 2rem;
 }

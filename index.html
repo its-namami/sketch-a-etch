@@ -7,7 +7,17 @@
     <link href="style.css" rel="stylesheet"/>
   </head>
   <body>
+    <form id="help">
+      <h1>Welcome to Sketch-A-Etch!</h1>
+      <h2>How to play</h2>
+      <p>First you have to define how big you want your board to be.</p>
+      <p>For that, choose appropriate Dimensions in the height- and width inputboxes.<i> I suggest &lt; 100 each due to <strong>performance issues.</strong></i></p>
+      <p>Then you should add the <strong>rows first, then columns</strong> (<i>whether Start or End matters not</i>).</p>
+      <p>Once the board is created, you can press on the screen, and sketch-your-etch!</p>
+      <button type="submit">I understand, hide this message</button>
+    </form>
     <form id="dimensions">
+      <p>Change resize factor</p>
       <label for="height">Height</label>
       <input id="height" type="text" value="1" placeholder="1"/>
       <label for="width">Width</label>
@@ -24,6 +34,7 @@
       <button id="del-end-rows">Delete End Rows</button>
       <button id="del-start-columns">Delete Start Columns</button>
       <button id="del-end-columns">Delete End Columns</button>
+      <button id="show-help">Show Help</button>
     </div>
     
     <main>

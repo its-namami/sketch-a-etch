@@ -16,12 +16,14 @@
       <p>Once the board is created, you can press on the screen, and sketch-your-etch!</p>
       <button type="submit">I understand, hide this message</button>
     </form>
-    <form id="dimensions">
-      <p>Change resize factor</p>
+    <form id="settings">
+      <p>Change resize factor and brush color</p>
       <label for="height">Height</label>
       <input id="height" type="text" value="1" placeholder="1"/>
       <label for="width">Width</label>
       <input id="width" type="text" value="1" placeholder="1"/>
+      <label for="color">Choose color</label>
+      <input id="color" type="color" />
       <button type="submit">Apply</button>
     </form>
     
@@ -35,6 +37,7 @@
       <button id="del-start-columns">Delete Start Columns</button>
       <button id="del-end-columns">Delete End Columns</button>
       <button id="show-help">Show Help</button>
+
     </div>
     
     <main>

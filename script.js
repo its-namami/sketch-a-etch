@@ -50,10 +50,11 @@ const delEndColumn = () => {
 
 const board = document.querySelector('#board');
 const helpForm = document.querySelector('form#help');
-const dimensionsForm = document.querySelector('form#dimensions');
-const dimensionsHeightInput = dimensionsForm.querySelector('input#height');
-const dimensionsWidthInput = dimensionsForm.querySelector('input#width');
-const chosenDimensions = { width: 1, height: 1 };
+const settingsForm = document.querySelector('form#settings');
+const settingsHeightInput = settingsForm.querySelector('input#height');
+const settingsWidthInput = settingsForm.querySelector('input#width');
+const settingsColorInput = settingsForm.querySelector('input#color');
+const chosenSettings = { width: 1, height: 1, color: "#000000" };
 
 const addStartRowsBtn = document.querySelector('button#add-start-rows');
 const addEndRowsBtn = document.querySelector('button#add-end-rows');
@@ -71,11 +72,12 @@ helpForm.addEventListener('submit', e => {
   helpForm.classList.add('hide');
 });
 
-dimensionsForm.addEventListener('submit', e => {
+settingsForm.addEventListener('submit', e => {
   e.preventDefault();
   
-  chosenDimensions.height = dimensionsHeightInput.value;
-  chosenDimensions.width = dimensionsWidthInput.value;
+  chosenSettings.height = settingsHeightInput.value;
+  chosenSettings.width = settingsWidthInput.value;
+  chosenSettings.color = settingsColorInput.value;
 });
 
 // pointer-event for stylus/touch-IO-compatibility
@@ -92,39 +94,39 @@ board.addEventListener('pointerrawupdate', e => {
   );
 
   if (actualElement?.classList.contains('cell'))
-    actualElement.classList.add('active');
+    actualElement.style.backgroundColor = chosenSettings.color;
 });
 
 addStartRowsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.height; i++) addStartRow(board.firstChild?.childElementCount || 1);
+  for (let i=0; i < chosenSettings.height; i++) addStartRow(board.firstChild?.childElementCount || 1);
 });
 
 addEndRowsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.height; i++) addEndRow(board.firstChild?.childElementCount);
+  for (let i=0; i < chosenSettings.height; i++) addEndRow(board.firstChild?.childElementCount);
 });
 
 addStartColumnsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.width; i++) addStartColumn();
+  for (let i=0; i < chosenSettings.width; i++) addStartColumn();
 });
 
 addEndColumnsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.width; i++) addEndColumn();
+  for (let i=0; i < chosenSettings.width; i++) addEndColumn();
 });
 
 delStartRowsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.height; i++) delStartRow();
+  for (let i=0; i < chosenSettings.height; i++) delStartRow();
 });
 
 delEndRowsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.height; i++) delEndRow();
+  for (let i=0; i < chosenSettings.height; i++) delEndRow();
 });
 
 delStartColumnsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.width; i++) delStartColumn();
+  for (let i=0; i < chosenSettings.width; i++) delStartColumn();
 });
 
 delEndColumnsBtn.addEventListener('pointerdown', () => {
-  for (let i=0; i < chosenDimensions.width; i++) delEndColumn();
+  for (let i=0; i < chosenSettings.width; i++) delEndColumn();
 });
 
 showHelpBtn.addEventListener('pointerdown', () => {

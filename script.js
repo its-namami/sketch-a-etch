@@ -10,21 +10,19 @@ const buildCellRow = size => {
   cellRow.classList.add('row');
 
   for (let i = 0; i < size; i++) {
-    cellRow.appendChild(buildCell());
+    cellRow.append(buildCell());
   }
 
   return cellRow;
 }
 
-const populateBoard = (width, height, board) => {
-  for (let i = 0; i < height; i++) {
-    board.appendChild(buildCellRow(width));
-  }
+const addBoardRow = (width) => {
+  board.append(buildCellRow(width));
 }
 
 const board = document.querySelector('#board');
 
-populateBoard(5, 5, board);
+for(let i = 0; i < 5; i++) { addBoardRow(5); }
 
 // pointer-event for stylus/touch-IO-compatibility
 board.addEventListener('pointerrawupdate', e => {
@@ -43,3 +41,29 @@ board.addEventListener('pointerrawupdate', e => {
     actualElement.classList.add('active');
 });
 
+const increaseBoardWidth = width => {
+  const rows = board.querySelectorAll('& > .row');
+
+  rows.forEach(row => {
+    for (let i = 0; i < width; i++) {
+      row.append(buildCell())
+    }
+  });
+}
+
+increaseBoardHeight = height => {
+  for (let i = 0; i < height; i++) {
+    addBoardRow(firstRow?.children.length || 1);
+  }
+}
+const firstRow = document.querySelector('#board > .row');
+const increaseWidthBtn = document.querySelector('button#increase-width');
+const increaseHeightBtn = document.querySelector('button#increase-height');
+
+increaseWidthBtn.addEventListener('pointerdown', e => {
+  increaseBoardWidth(2);
+});
+
+increaseHeightBtn.addEventListener('pointerdown', e => {
+  increaseBoardHeight(2);
+});

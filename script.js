@@ -20,16 +20,32 @@ const addStartRow = width => {
   board.prepend(buildCellRow(width));
 }
 
+const delStartRow = () => {
+  board.firstChild?.remove();
+}
+
 const addEndRow = width => {
   board.append(buildCellRow(width));
+}
+
+const delEndRow = width => {
+  board.lastChild?.remove();
 }
 
 const addStartColumn = () => {
   board.querySelectorAll('.row').forEach(row => row.prepend(buildCell()));
 }
 
+const delStartColumn = () => {
+  board.querySelectorAll('.row').forEach(row => row.firstChild?.remove());
+}
+
 const addEndColumn = () => {
   board.querySelectorAll('.row').forEach(row => row.append(buildCell()));
+}
+
+const delEndColumn = () => {
+  board.querySelectorAll('.row').forEach(row => row.lastChild?.remove());
 }
 
 const board = document.querySelector('#board');
@@ -44,8 +60,6 @@ dimensionsForm.addEventListener('submit', e => {
   chosenDimensions.height = dimensionsHeightInput.value;
   chosenDimensions.width = dimensionsWidthInput.value;
 });
-
-for(let i = 0; i < 5; i++) { addEndRow(5); }
 
 // pointer-event for stylus/touch-IO-compatibility
 board.addEventListener('pointerrawupdate', e => {
@@ -64,25 +78,45 @@ board.addEventListener('pointerrawupdate', e => {
     actualElement.classList.add('active');
 });
 
-const firstRow = document.querySelector('#board > .row');
-const addEndRowsBtn = document.querySelector('button#add-end-rows');
-const addEndColumnsBtn = document.querySelector('button#add-end-columns');
 const addStartRowsBtn = document.querySelector('button#add-start-rows');
+const addEndRowsBtn = document.querySelector('button#add-end-rows');
 const addStartColumnsBtn = document.querySelector('button#add-start-columns');
+const addEndColumnsBtn = document.querySelector('button#add-end-columns');
 
-addStartColumnsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < chosenDimensions.height; i++) addStartColumn(2);
-});
-
-addEndColumnsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < chosenDimensions.height; i++) addEndColumn(2);
-});
+const delStartRowsBtn = document.querySelector('button#del-start-rows');
+const delEndRowsBtn = document.querySelector('button#del-end-rows');
+const delStartColumnsBtn = document.querySelector('button#del-start-columns');
+const delEndColumnsBtn = document.querySelector('button#del-end-columns');
 
 addStartRowsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < chosenDimensions.width; i++) addStartRow(firstRow.childElementCount);
+  for (let i=0; i < chosenDimensions.height; i++) addStartRow(board.firstChild?.childElementCount || 1);
 });
 
 addEndRowsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < chosenDimensions.width; i++) addEndRow(firstRow.childElementCount);
+  for (let i=0; i < chosenDimensions.height; i++) addEndRow(board.firstChild?.childElementCount);
+});
+
+addStartColumnsBtn.addEventListener('pointerdown', e => {
+  for (let i=0; i < chosenDimensions.width; i++) addStartColumn();
+});
+
+addEndColumnsBtn.addEventListener('pointerdown', e => {
+  for (let i=0; i < chosenDimensions.width; i++) addEndColumn();
+});
+
+delStartRowsBtn.addEventListener('pointerdown', e => {
+  for (let i=0; i < chosenDimensions.width; i++) delStartRow();
+});
+
+delEndRowsBtn.addEventListener('pointerdown', e => {
+  for (let i=0; i < chosenDimensions.width; i++) delEndRow();
+});
+
+delStartColumnsBtn.addEventListener('pointerdown', e => {
+  for (let i=0; i < chosenDimensions.height; i++) delStartColumn();
+});
+
+delEndColumnsBtn.addEventListener('pointerdown', e => {
+  for (let i=0; i < chosenDimensions.height; i++) delEndColumn();
 });
 

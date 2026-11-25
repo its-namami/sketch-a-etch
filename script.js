@@ -16,13 +16,25 @@ const buildCellRow = size => {
   return cellRow;
 }
 
-const addBoardRow = (width) => {
+const addStartRow = width => {
+  board.prepend(buildCellRow(width));
+}
+
+const addEndRow = width => {
   board.append(buildCellRow(width));
+}
+
+const addStartColumn = () => {
+  board.querySelectorAll('.row').forEach(row => row.prepend(buildCell()));
+}
+
+const addEndColumn = () => {
+  board.querySelectorAll('.row').forEach(row => row.append(buildCell()));
 }
 
 const board = document.querySelector('#board');
 
-for(let i = 0; i < 5; i++) { addBoardRow(5); }
+for(let i = 0; i < 5; i++) { addEndRow(5); }
 
 // pointer-event for stylus/touch-IO-compatibility
 board.addEventListener('pointerrawupdate', e => {
@@ -41,29 +53,27 @@ board.addEventListener('pointerrawupdate', e => {
     actualElement.classList.add('active');
 });
 
-const increaseBoardWidth = width => {
-  const rows = board.querySelectorAll('& > .row');
-
-  rows.forEach(row => {
-    for (let i = 0; i < width; i++) {
-      row.append(buildCell())
-    }
-  });
-}
-
-increaseBoardHeight = height => {
-  for (let i = 0; i < height; i++) {
-    addBoardRow(firstRow?.children.length || 1);
-  }
-}
 const firstRow = document.querySelector('#board > .row');
-const increaseWidthBtn = document.querySelector('button#increase-width');
-const increaseHeightBtn = document.querySelector('button#increase-height');
+const addEndRowsBtn = document.querySelector('button#add-end-rows');
+const addEndColumnsBtn = document.querySelector('button#add-end-columns');
+const addStartRowsBtn = document.querySelector('button#add-start-rows');
+const addStartColumnsBtn = document.querySelector('button#add-start-columns');
 
-increaseWidthBtn.addEventListener('pointerdown', e => {
-  increaseBoardWidth(2);
+const modifyHeightValue = 2;
+const modifyWidthValue = 2;
+
+addEndColumnsBtn.addEventListener('pointerdown', e => {
+  for(let i=0; i < modifyWidthValue; i++) addEndColumn(2);
 });
 
-increaseHeightBtn.addEventListener('pointerdown', e => {
-  increaseBoardHeight(2);
+addStartColumnsBtn.addEventListener('pointerdown', e => {
+  for(let i=0; i < modifyWidthValue; i++) addStartColumn(2);
+});
+
+addEndRowsBtn.addEventListener('pointerdown', e => {
+  for(let i=0; i < modifyHeightValue; i++) addEndRow(firstRow.childElementCount);
+});
+
+addStartRowsBtn.addEventListener('pointerdown', e => {
+  for(let i=0; i < modifyHeightValue; i++) addStartRow(firstRow.childElementCount);
 });

@@ -33,6 +33,17 @@ const addEndColumn = () => {
 }
 
 const board = document.querySelector('#board');
+const dimensionsForm = document.querySelector('form#dimensions');
+const dimensionsHeightInput = dimensionsForm.querySelector('input#height');
+const dimensionsWidthInput = dimensionsForm.querySelector('input#width');
+const chosenDimensions = { width: 1, height: 1 };
+
+dimensionsForm.addEventListener('submit', e => {
+  e.preventDefault();
+  
+  chosenDimensions.height = dimensionsHeightInput.value;
+  chosenDimensions.width = dimensionsWidthInput.value;
+});
 
 for(let i = 0; i < 5; i++) { addEndRow(5); }
 
@@ -59,21 +70,19 @@ const addEndColumnsBtn = document.querySelector('button#add-end-columns');
 const addStartRowsBtn = document.querySelector('button#add-start-rows');
 const addStartColumnsBtn = document.querySelector('button#add-start-columns');
 
-const modifyHeightValue = 2;
-const modifyWidthValue = 2;
+addStartColumnsBtn.addEventListener('pointerdown', e => {
+  for(let i=0; i < chosenDimensions.height; i++) addStartColumn(2);
+});
 
 addEndColumnsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < modifyWidthValue; i++) addEndColumn(2);
-});
-
-addStartColumnsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < modifyWidthValue; i++) addStartColumn(2);
-});
-
-addEndRowsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < modifyHeightValue; i++) addEndRow(firstRow.childElementCount);
+  for(let i=0; i < chosenDimensions.height; i++) addEndColumn(2);
 });
 
 addStartRowsBtn.addEventListener('pointerdown', e => {
-  for(let i=0; i < modifyHeightValue; i++) addStartRow(firstRow.childElementCount);
+  for(let i=0; i < chosenDimensions.width; i++) addStartRow(firstRow.childElementCount);
 });
+
+addEndRowsBtn.addEventListener('pointerdown', e => {
+  for(let i=0; i < chosenDimensions.width; i++) addEndRow(firstRow.childElementCount);
+});
+

@@ -28,7 +28,7 @@ const addEndRow = width => {
   board.append(buildCellRow(width));
 }
 
-const delEndRow = width => {
+const delEndRow = () => {
   board.lastChild?.remove();
 }
 

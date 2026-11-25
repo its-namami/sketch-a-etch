@@ -1,7 +1,7 @@
 const buildCell = () => {
   const cell = document.createElement('div');
   cell.classList.add('cell');
-  cell.classList.add('outline'); // for debugging
+  cell.classList.add('outline');
   return cell;
 }
 
